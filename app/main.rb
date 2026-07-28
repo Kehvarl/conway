@@ -64,7 +64,7 @@ module Main
 
     render(args)
 
-    if args.state.tick_count % 8 == 0
+    if args.state.tick_count % 4 == 0
       step(args)
     end
 
