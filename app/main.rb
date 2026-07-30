@@ -5,6 +5,33 @@ module Main
     load(args)
   end
 
+  def apply_rule rule, live, living_neighbors
+    case rule
+      when 0
+        if live
+          if living_neighbors > 1 and living_neighbors < 4
+            return true
+          end
+        else
+          if living_neighbors == 3
+            return true
+          end
+        end
+        return false
+      when 1
+        if live
+          if living_neighbors > 2 and living_neighbors < 5
+            return true
+          end
+        else
+          if rand(10) > 7
+            return true
+          end
+        end
+        return false
+      end
+  end
+
   def load args
     (0..72).each do |y|
       (0..128).each do |x|
@@ -34,14 +61,14 @@ module Main
 
     next_step = {}
     life.each do |cell, living_neighbors|
-      if args.state.living.include?(cell)
-        if living_neighbors > 1 and living_neighbors < 4
-          next_step[cell] = 1
-        end
+      living = args.state.living.include?(cell)
+      if living
+        rule = args.state.living[cell]
       else
-        if living_neighbors == 3
-          next_step[cell] = 1
-        end
+        rule = 0
+      end
+      if apply_rule(rule, living, living_neighbors)
+        next_step[cell] = rule
       end
     end
 
