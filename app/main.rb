@@ -36,7 +36,7 @@ module Main
     (0..72).each do |y|
       (0..128).each do |x|
         if rand(100) < 10
-          args.state.living[[x,y]] = 1
+          args.state.living[[x,y]] = {living:true, s:[0,1,1,1,1,0,0,0,0], s:[0,0,0,1,0,0,0,0,0]}
         end
       end
     end
