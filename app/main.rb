@@ -37,11 +37,10 @@ module Main
         nx, ny = n
         lx = cx + nx
         ly = cy + ny
-        if life.include?([lx, ly])
-          life[[lx, ly]] += 1
-        else
-          life[[lx, ly]] = 1
+        if not life.include?([lx, ly])
+          life[[lx, ly]] = 0 # {s:[0,0,0,0,0,0,0,0,0], s:[0,0,0,0,0,0,0,0,0]}
         end
+        life[[lx, ly]] += 1
       end
     end
 
