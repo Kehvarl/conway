@@ -6,30 +6,16 @@ module Main
   end
 
   def apply_rule rule, live, living_neighbors
-    case rule
-      when 0
-        if live
-          if living_neighbors > 1 and living_neighbors < 4
-            return true
-          end
-        else
-          if living_neighbors == 3
-            return true
-          end
-        end
-        return false
-      when 1
-        if live
-          if living_neighbors > 2 and living_neighbors < 5
-            return true
-          end
-        else
-          if rand(10) > 7
-            return true
-          end
-        end
-        return false
+    if live
+      if living_neighbors > 1 and living_neighbors < 4
+        return true
       end
+    else
+      if living_neighbors == 3
+        return true
+      end
+    end
+    return false
   end
 
   def load args
@@ -68,7 +54,7 @@ module Main
         rule = 0
       end
       if apply_rule(rule, living, living_neighbors)
-        next_step[cell] = rule
+        next_step[cell] = {living:true, s:[0,1,1,1,1,0,0,0,0], s:[0,0,0,1,0,0,0,0,0]}
       end
     end
 
