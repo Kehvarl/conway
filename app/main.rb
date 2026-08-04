@@ -38,10 +38,11 @@ module Main
         lx = cx + nx
         ly = cy + ny
         if not life.include?([lx, ly])
-          # Need a nice way to add arrays)
           life[[lx, ly]] = 0 # {s:[0,0,0,0,0,0,0,0,0], s:[0,0,0,0,0,0,0,0,0]}
+        else
+          # Need a nice way to add arrays)
+          life[[lx, ly]] += 1
         end
-        life[[lx, ly]] += 1
       end
     end
 
