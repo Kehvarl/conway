@@ -22,7 +22,7 @@ module Main
     (0..72).each do |y|
       (0..128).each do |x|
         if rand(100) < 10
-          args.state.living[[x,y]] = {living:true, s:[0,1,1,1,1,0,0,0,0], s:[0,0,0,1,0,0,0,0,0]}
+          args.state.living[[x,y]] = {living:true, b:[0,1,1,1,1,0,0,0,0], s:[0,0,0,1,0,0,0,0,0]}
         end
       end
     end
@@ -38,23 +38,20 @@ module Main
         lx = cx + nx
         ly = cy + ny
         if not life.include?([lx, ly])
-          # Need a nice way to add arrays)
-          life[[lx, ly]] = 0 # {s:[0,0,0,0,0,0,0,0,0], s:[0,0,0,0,0,0,0,0,0]}
+          life[[lx, ly]] = {b:[0,0,0,0,0,0,0,0,0], s:[0,0,0,0,0,0,0,0,0]}
+        else
+          b = life[[lx, ly]].b.zip(args.state.living[cell].b).map{|pair| pair.reduce(&:+) }
+          s = life[[lx, ly]].s.zip(args.state.living[cell].s).map{|pair| pair.reduce(&:+) }
+          life[[lx, ly]] =  {b:b, s:s}
         end
-        life[[lx, ly]] += 1
       end
     end
 
     next_step = {}
     life.each do |cell, living_neighbors|
       living = args.state.living.include?(cell)
-      if living
-        rule = args.state.living[cell]
-      else
-        rule = 0
-      end
-      if apply_rule(rule, living, living_neighbors)
-        next_step[cell] = {living:true, s:[0,1,1,1,1,0,0,0,0], s:[0,0,0,1,0,0,0,0,0]}
+      if apply_rule(0, living, living_neighbors.count())
+        next_step[cell] = {living:true, s:[0,1,1,1,1,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
       end
     end
 
