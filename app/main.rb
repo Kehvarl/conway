@@ -50,6 +50,7 @@ module Main
     next_step = {}
     life.each do |cell, living_neighbors|
       living = args.state.living.include?(cell)
+      puts(living_neighbors)
       if apply_rule(0, living, living_neighbors.count())
         next_step[cell] = {living:true, s:[0,1,1,1,1,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
       end
