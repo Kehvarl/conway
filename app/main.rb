@@ -7,9 +7,13 @@ module Main
 
   def apply_rule rule, live, living_neighbors
     if live
-      if living_neighbors > 1 and living_neighbors < 4
-        return true
+      pass = [0,0,0,0,0,0,0,0,0]
+      living_neighbors.s.each_with_index do |v, i|
+        if i > 0 and v >= i
+          pass[i] = v
+        end
       end
+      return pass
     else
       if living_neighbors == 3
         return true
@@ -50,8 +54,8 @@ module Main
     next_step = {}
     life.each do |cell, living_neighbors|
       living = args.state.living.include?(cell)
-      puts(living_neighbors)
-      if apply_rule(0, living, living_neighbors.count())
+      pass = apply_rule(0, living, living_neighbors)
+      if pass.any {|e| e > 0}
         next_step[cell] = {living:true, s:[0,1,1,1,1,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
       end
     end
