@@ -15,18 +15,22 @@ module Main
       end
       return pass
     else
-      if living_neighbors == 3
-        return true
+      pass = [0,0,0,0,0,0,0,0,0]
+      living_neighbors.b.each_with_index do |v, i|
+        if i > 0 and v >= i
+          pass[i] = v
+        end
       end
+      return pass
     end
-    return false
+    return [0,0,0,0,0,0,0,0,0]
   end
 
   def load args
     (0..72).each do |y|
       (0..128).each do |x|
         if rand(100) < 10
-          args.state.living[[x,y]] = {living:true, b:[0,1,1,1,1,0,0,0,0], s:[0,0,0,1,0,0,0,0,0]}
+          args.state.living[[x,y]] = {living:true, s:[0,1,1,1,1,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
         end
       end
     end
@@ -42,11 +46,11 @@ module Main
         lx = cx + nx
         ly = cy + ny
         if not life.include?([lx, ly])
-          life[[lx, ly]] = {b:[0,0,0,0,0,0,0,0,0], s:[0,0,0,0,0,0,0,0,0]}
+          life[[lx, ly]] = {s:[0,0,0,0,0,0,0,0,0], b:[0,0,0,0,0,0,0,0,0]}
         else
           b = life[[lx, ly]].b.zip(args.state.living[cell].b).map{|pair| pair.reduce(&:+) }
           s = life[[lx, ly]].s.zip(args.state.living[cell].s).map{|pair| pair.reduce(&:+) }
-          life[[lx, ly]] =  {b:b, s:s}
+          life[[lx, ly]] =  {s:s, b:b}
         end
       end
     end
@@ -55,7 +59,7 @@ module Main
     life.each do |cell, living_neighbors|
       living = args.state.living.include?(cell)
       pass = apply_rule(0, living, living_neighbors)
-      if pass.any {|e| e > 0}
+      if pass.any? {|e| e > 0}
         next_step[cell] = {living:true, s:[0,1,1,1,1,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
       end
     end
