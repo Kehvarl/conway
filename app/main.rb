@@ -30,7 +30,7 @@ module Main
     (0..72).each do |y|
       (0..128).each do |x|
         if rand(100) < 10
-          args.state.living[[x,y]] = {living:true, s:[0,1,1,1,1,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
+          args.state.living[[x,y]] = {living:true, s:[0,0,1,1,0,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
         end
       end
     end
@@ -60,7 +60,7 @@ module Main
       living = args.state.living.include?(cell)
       pass = apply_rule(0, living, living_neighbors)
       if pass.any? {|e| e > 0}
-        next_step[cell] = {living:true, s:[0,1,1,1,1,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
+        next_step[cell] = {living:true, s:[0,0,1,1,0,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
       end
     end
 
