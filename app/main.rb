@@ -29,7 +29,7 @@ module Main
   def load args
     (0..72).each do |y|
       (0..128).each do |x|
-        if rand(100) < 10
+        if rand(100) < 15
           args.state.living[[x,y]] = {living:true, s:[0,0,1,1,0,0,0,0,0], b:[0,0,0,1,0,0,0,0,0]}
         end
       end
