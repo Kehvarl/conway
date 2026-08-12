@@ -6,7 +6,7 @@
 devid=kehvarl
 devtitle=Kehvarl
 gameid=conway
-gametitle=Conway's Game of Life
+gametitle=Modified Conway Simulation
 version=0.1
 icon=metadata/icon.png
 
