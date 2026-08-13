@@ -47,11 +47,10 @@ module Main
         ly = cy + ny
         if not life.include?([lx, ly])
           life[[lx, ly]] = {s:[0,0,0,0,0,0,0,0,0], b:[0,0,0,0,0,0,0,0,0]}
-        else
-          b = life[[lx, ly]].b.zip(args.state.living[cell].b).map{|pair| pair.reduce(&:+) }
-          s = life[[lx, ly]].s.zip(args.state.living[cell].s).map{|pair| pair.reduce(&:+) }
-          life[[lx, ly]] =  {s:s, b:b}
         end
+        b = life[[lx, ly]].b.zip(args.state.living[cell].b).map{|pair| pair.reduce(&:+) }
+        s = life[[lx, ly]].s.zip(args.state.living[cell].s).map{|pair| pair.reduce(&:+) }
+        life[[lx, ly]] =  {s:s, b:b}
       end
     end
 
