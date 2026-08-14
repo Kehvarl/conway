@@ -36,6 +36,7 @@ module Main
     end
   end
 
+  # For each cell, do something
   def step args
     neighbors = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
     life = {}
