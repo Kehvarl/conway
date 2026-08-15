@@ -36,7 +36,8 @@ module Main
     end
   end
 
-  # For each cell, do something
+  # For each cell,
+  # check neighs and increment neighbor counts
   def step args
     neighbors = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
     life = {}
